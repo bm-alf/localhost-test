@@ -1,4 +1,6 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8">
+<!DOCTYPE html> <html lang="en"> <head>
+<meta charset="UTF-8">
+
 <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -7,6 +9,7 @@
 <title>Local + Cloud</title>
 
 <style>
+
     * {
         box-sizing: border-box;
     }
@@ -26,33 +29,46 @@
         height: 100vh;
     }
 
-    /* SIDEBAR */
+    /* ================================
+       SIDEBAR
+    ================================= */
 
     .sidebar {
         width: 220px;
         min-width: 220px;
+
         background: #111827;
         color: white;
+
         padding: 20px;
     }
 
     .logo {
         font-size: 20px;
         font-weight: bold;
+
         margin-bottom: 30px;
     }
 
     .nav-button {
         display: block;
+
         width: 100%;
+
         margin-bottom: 8px;
+
         padding: 12px;
+
         border: none;
         border-radius: 7px;
+
         background: #1f2937;
         color: #e5e7eb;
+
         text-align: left;
+
         font-size: 15px;
+
         cursor: pointer;
     }
 
@@ -65,37 +81,55 @@
         color: white;
     }
 
-    /* MAIN */
+    /* ================================
+       MAIN
+    ================================= */
 
     .main {
         flex: 1;
+
         min-width: 0;
+
         height: 100vh;
+
         display: flex;
         flex-direction: column;
+
         background: #f3f4f6;
     }
 
-    /* TOOLBAR */
+    /* ================================
+       TOOLBAR
+    ================================= */
 
     .toolbar {
         height: 50px;
         min-height: 50px;
+
         display: flex;
         align-items: center;
+
         gap: 6px;
+
         padding: 7px 10px;
+
         background: white;
+
         border-bottom: 1px solid #d1d5db;
     }
 
     .toolbar button {
         width: 34px;
         height: 34px;
+
         border: 1px solid #d1d5db;
+
         border-radius: 6px;
+
         background: white;
+
         font-size: 16px;
+
         cursor: pointer;
     }
 
@@ -105,53 +139,101 @@
 
     .url-display {
         flex: 1;
+
         height: 34px;
+
         display: flex;
         align-items: center;
+
         padding: 0 12px;
+
         margin-left: 4px;
+
         background: #f3f4f6;
+
         border: 1px solid #d1d5db;
+
         border-radius: 6px;
+
         color: #6b7280;
+
         font-size: 13px;
+
         overflow: hidden;
+
         white-space: nowrap;
     }
 
-    /* PAGE */
+    /* ================================
+       MESSAGE AREA
+    ================================= */
 
     .page-container {
         flex: 1;
+
         min-height: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #f3f4f6;
     }
 
-    #page {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: white;
+    .welcome {
+        text-align: center;
+
+        color: #374151;
     }
+
+    .welcome h1 {
+        margin-bottom: 10px;
+    }
+
+    .welcome p {
+        color: #6b7280;
+    }
+
+    /* ================================
+       MOBILE
+    ================================= */
 
     @media (max-width: 700px) {
+
         .sidebar {
             width: 170px;
             min-width: 170px;
+
             padding: 12px;
         }
+
+        .logo {
+            font-size: 17px;
+        }
+
+        .nav-button {
+            font-size: 13px;
+        }
+
     }
+
 </style>
 
 </head> <body>
 <div class="app">
 
-    <!-- SIDEBAR -->
+    <!-- ================================
+         SIDEBAR
+    ================================= -->
 
     <aside class="sidebar">
 
         <div class="logo">
             My Navigator
         </div>
+
 
         <button
             class="nav-button active"
@@ -160,6 +242,7 @@
         >
             🖥️ Local
         </button>
+
 
         <button
             class="nav-button"
@@ -172,23 +255,32 @@
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- ================================
+         MAIN
+    ================================= -->
 
     <main class="main">
 
+
+        <!-- TOOLBAR -->
+
         <div class="toolbar">
 
-            <button onclick="goBack()" title="Back">
-                ←
+            <button
+                onclick="openCurrentPage()"
+                title="Open"
+            >
+                ↗
             </button>
 
-            <button onclick="goForward()" title="Forward">
-                →
-            </button>
 
-            <button onclick="reloadPage()" title="Reload">
+            <button
+                onclick="reloadPage()"
+                title="Reload"
+            >
                 ↻
             </button>
+
 
             <div
                 class="url-display"
@@ -200,12 +292,21 @@
         </div>
 
 
+        <!-- CONTENT -->
+
         <div class="page-container">
 
-            <iframe
-                id="page"
-                title="Page"
-            ></iframe>
+            <div class="welcome">
+
+                <h1>
+                    Local + Cloud Navigator
+                </h1>
+
+                <p>
+                    Select Local or Cloud from the left sidebar.
+                </p>
+
+            </div>
 
         </div>
 
@@ -225,6 +326,7 @@
     const LOCAL_URL =
         "http://localhost:5000/api/test";
 
+
     const CLOUD_URL =
         "https://alfdigitalworld.com/alfiot/admin";
 
@@ -235,14 +337,13 @@
     =========================================
     */
 
-    const page =
-        document.getElementById("page");
-
     const urlDisplay =
         document.getElementById("urlDisplay");
 
+
     const localButton =
         document.getElementById("localButton");
+
 
     const cloudButton =
         document.getElementById("cloudButton");
@@ -256,13 +357,20 @@
 
     function openLocal() {
 
-        page.src = LOCAL_URL;
+        window.open(
+            LOCAL_URL,
+            "_blank"
+        );
 
-        urlDisplay.textContent = LOCAL_URL;
+
+        urlDisplay.textContent =
+            LOCAL_URL;
+
 
         localButton.classList.add("active");
 
         cloudButton.classList.remove("active");
+
     }
 
 
@@ -274,46 +382,41 @@
 
     function openCloud() {
 
-        page.src = CLOUD_URL;
+        window.open(
+            CLOUD_URL,
+            "_blank"
+        );
 
-        urlDisplay.textContent = CLOUD_URL;
+
+        urlDisplay.textContent =
+            CLOUD_URL;
+
 
         cloudButton.classList.add("active");
 
         localButton.classList.remove("active");
-    }
-
-
-    /*
-    =========================================
-    BACK
-    =========================================
-    */
-
-    function goBack() {
-
-        try {
-            page.contentWindow.history.back();
-        } catch (error) {
-            console.log(error);
-        }
 
     }
 
 
     /*
     =========================================
-    FORWARD
+    OPEN CURRENT PAGE
     =========================================
     */
 
-    function goForward() {
+    function openCurrentPage() {
 
-        try {
-            page.contentWindow.history.forward();
-        } catch (error) {
-            console.log(error);
-        }
+        const currentURL =
+            cloudButton.classList.contains("active")
+                ? CLOUD_URL
+                : LOCAL_URL;
+
+
+        window.open(
+            currentURL,
+            "_blank"
+        );
 
     }
 
@@ -326,18 +429,18 @@
 
     function reloadPage() {
 
-        page.src = page.src;
+        const currentURL =
+            cloudButton.classList.contains("active")
+                ? CLOUD_URL
+                : LOCAL_URL;
+
+
+        window.open(
+            currentURL,
+            "_blank"
+        );
 
     }
-
-
-    /*
-    =========================================
-    START WITH LOCAL
-    =========================================
-    */
-
-    openLocal();
 
 </script>
 

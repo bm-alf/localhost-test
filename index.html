@@ -1,15 +1,12 @@
-<!DOCTYPE html> <html lang="en"> <head>
-<meta charset="UTF-8">
-
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8">
 <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Local + Cloud Navigator</title>
+<title>Local + Cloud</title>
 
 <style>
-
     * {
         box-sizing: border-box;
     }
@@ -23,84 +20,44 @@
         overflow: hidden;
     }
 
-    /* =====================================
-       MAIN APPLICATION
-    ===================================== */
-
     .app {
         display: flex;
         width: 100%;
         height: 100vh;
     }
 
-    /* =====================================
-       LEFT SIDEBAR
-    ===================================== */
+    /* SIDEBAR */
 
     .sidebar {
-        width: 250px;
-        min-width: 250px;
-        height: 100vh;
-
+        width: 220px;
+        min-width: 220px;
         background: #111827;
         color: white;
-
         padding: 20px;
-        overflow-y: auto;
     }
 
     .logo {
-        font-size: 21px;
+        font-size: 20px;
         font-weight: bold;
         margin-bottom: 30px;
     }
 
-    .section-title {
-        margin-top: 20px;
-        margin-bottom: 10px;
-
-        color: #9ca3af;
-
-        font-size: 11px;
-        font-weight: bold;
-
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    /* =====================================
-       NAVIGATION BUTTONS
-    ===================================== */
-
     .nav-button {
         display: block;
-
         width: 100%;
-
-        margin-bottom: 7px;
-
-        padding: 12px 14px;
-
+        margin-bottom: 8px;
+        padding: 12px;
         border: none;
         border-radius: 7px;
-
         background: #1f2937;
         color: #e5e7eb;
-
         text-align: left;
-
-        font-size: 14px;
-
+        font-size: 15px;
         cursor: pointer;
-
-        transition:
-            background 0.15s,
-            color 0.15s;
     }
 
     .nav-button:hover {
         background: #374151;
-        color: white;
     }
 
     .nav-button.active {
@@ -108,53 +65,37 @@
         color: white;
     }
 
-    /* =====================================
-       RIGHT SIDE
-    ===================================== */
+    /* MAIN */
 
     .main {
         flex: 1;
         min-width: 0;
         height: 100vh;
-
         display: flex;
         flex-direction: column;
-
         background: #f3f4f6;
     }
 
-    /* =====================================
-       TOP TOOLBAR
-    ===================================== */
+    /* TOOLBAR */
 
     .toolbar {
         height: 50px;
         min-height: 50px;
-
         display: flex;
         align-items: center;
-
         gap: 6px;
-
         padding: 7px 10px;
-
-        background: #ffffff;
-
+        background: white;
         border-bottom: 1px solid #d1d5db;
     }
 
     .toolbar button {
         width: 34px;
         height: 34px;
-
         border: 1px solid #d1d5db;
-
         border-radius: 6px;
-
         background: white;
-
         font-size: 16px;
-
         cursor: pointer;
     }
 
@@ -164,32 +105,21 @@
 
     .url-display {
         flex: 1;
-
         height: 34px;
-
         display: flex;
         align-items: center;
-
         padding: 0 12px;
-
         margin-left: 4px;
-
         background: #f3f4f6;
-
         border: 1px solid #d1d5db;
         border-radius: 6px;
-
         color: #6b7280;
-
         font-size: 13px;
-
         overflow: hidden;
         white-space: nowrap;
     }
 
-    /* =====================================
-       PAGE FRAME
-    ===================================== */
+    /* PAGE */
 
     .page-container {
         flex: 1;
@@ -197,56 +127,30 @@
     }
 
     #page {
-        display: block;
-
         width: 100%;
         height: 100%;
-
         border: none;
-
         background: white;
     }
 
-    /* =====================================
-       MOBILE
-    ===================================== */
-
     @media (max-width: 700px) {
-
         .sidebar {
-            width: 190px;
-            min-width: 190px;
+            width: 170px;
+            min-width: 170px;
             padding: 12px;
         }
-
-        .logo {
-            font-size: 17px;
-        }
-
-        .nav-button {
-            font-size: 12px;
-            padding: 10px;
-        }
-
     }
-
 </style>
 
 </head> <body>
 <div class="app">
 
-    <!-- =================================
-         LEFT SIDEBAR
-    ================================== -->
+    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
         <div class="logo">
-            Local + Cloud
-        </div>
-
-        <div class="section-title">
-            Pages
+            My Navigator
         </div>
 
         <button
@@ -268,34 +172,21 @@
     </aside>
 
 
-    <!-- =================================
-         MAIN CONTENT
-    ================================== -->
+    <!-- MAIN -->
 
     <main class="main">
 
-        <!-- TOP TOOLBAR -->
-
         <div class="toolbar">
 
-            <button
-                onclick="goBack()"
-                title="Back"
-            >
+            <button onclick="goBack()" title="Back">
                 ←
             </button>
 
-            <button
-                onclick="goForward()"
-                title="Forward"
-            >
+            <button onclick="goForward()" title="Forward">
                 →
             </button>
 
-            <button
-                onclick="reloadPage()"
-                title="Reload"
-            >
+            <button onclick="reloadPage()" title="Reload">
                 ↻
             </button>
 
@@ -303,20 +194,17 @@
                 class="url-display"
                 id="urlDisplay"
             >
-                Local Page
+                Local
             </div>
 
         </div>
 
 
-        <!-- PAGE -->
-
         <div class="page-container">
 
             <iframe
                 id="page"
-                src="local.html"
-                title="Page Viewer"
+                title="Page"
             ></iframe>
 
         </div>
@@ -329,29 +217,26 @@
 <script>
 
     /*
-     * ==========================================
-     * CHANGE THIS URL
-     * ==========================================
-     *
-     * Put your GitHub Pages URL here.
-     *
-     * Example:
-     *
-     * https://username.github.io/repository/
-     *
-     */
+    =========================================
+    YOUR ADDRESSES
+    =========================================
+    */
+
+    const LOCAL_URL =
+        "http://localhost:3000/";
 
     const CLOUD_URL =
         "https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/";
 
 
     /*
-     * ==========================================
-     * ELEMENTS
-     * ==========================================
-     */
+    =========================================
+    ELEMENTS
+    =========================================
+    */
 
-    const page = document.getElementById("page");
+    const page =
+        document.getElementById("page");
 
     const urlDisplay =
         document.getElementById("urlDisplay");
@@ -364,17 +249,16 @@
 
 
     /*
-     * ==========================================
-     * OPEN LOCAL PAGE
-     * ==========================================
-     */
+    =========================================
+    OPEN LOCAL
+    =========================================
+    */
 
     function openLocal() {
 
-        page.src = "local.html";
+        page.src = LOCAL_URL;
 
-        urlDisplay.textContent =
-            "Local Page";
+        urlDisplay.textContent = LOCAL_URL;
 
         localButton.classList.add("active");
 
@@ -383,17 +267,16 @@
 
 
     /*
-     * ==========================================
-     * OPEN CLOUD PAGE
-     * ==========================================
-     */
+    =========================================
+    OPEN CLOUD
+    =========================================
+    */
 
     function openCloud() {
 
         page.src = CLOUD_URL;
 
-        urlDisplay.textContent =
-            CLOUD_URL;
+        urlDisplay.textContent = CLOUD_URL;
 
         cloudButton.classList.add("active");
 
@@ -402,53 +285,59 @@
 
 
     /*
-     * ==========================================
-     * BACK
-     * ==========================================
-     */
+    =========================================
+    BACK
+    =========================================
+    */
 
     function goBack() {
 
         try {
             page.contentWindow.history.back();
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(
-                "Cannot control history of external page."
-            );
-        }
+
     }
 
 
     /*
-     * ==========================================
-     * FORWARD
-     * ==========================================
-     */
+    =========================================
+    FORWARD
+    =========================================
+    */
 
     function goForward() {
 
         try {
             page.contentWindow.history.forward();
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(
-                "Cannot control history of external page."
-            );
-        }
+
     }
 
 
     /*
-     * ==========================================
-     * RELOAD
-     * ==========================================
-     */
+    =========================================
+    RELOAD
+    =========================================
+    */
 
     function reloadPage() {
 
         page.src = page.src;
+
     }
+
+
+    /*
+    =========================================
+    START WITH LOCAL
+    =========================================
+    */
+
+    openLocal();
 
 </script>
 

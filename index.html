@@ -1,3 +1,4 @@
+<!DOCTYPE html> <html lang="en"> <head>
 <meta charset="UTF-8">
 
 <meta
@@ -22,7 +23,6 @@
         overflow: hidden;
     }
 
-
     /* =====================================
        MAIN APPLICATION
     ===================================== */
@@ -33,7 +33,6 @@
         height: 100vh;
     }
 
-
     /* =====================================
        LEFT SIDEBAR
     ===================================== */
@@ -41,25 +40,20 @@
     .sidebar {
         width: 250px;
         min-width: 250px;
-
         height: 100vh;
 
         background: #111827;
         color: white;
 
         padding: 20px;
-
         overflow-y: auto;
     }
-
 
     .logo {
         font-size: 21px;
         font-weight: bold;
-
         margin-bottom: 30px;
     }
-
 
     .section-title {
         margin-top: 20px;
@@ -73,7 +67,6 @@
         text-transform: uppercase;
         letter-spacing: 1px;
     }
-
 
     /* =====================================
        NAVIGATION BUTTONS
@@ -105,18 +98,15 @@
             color 0.15s;
     }
 
-
     .nav-button:hover {
         background: #374151;
         color: white;
     }
 
-
     .nav-button.active {
         background: #2563eb;
         color: white;
     }
-
 
     /* =====================================
        RIGHT SIDE
@@ -124,9 +114,7 @@
 
     .main {
         flex: 1;
-
         min-width: 0;
-
         height: 100vh;
 
         display: flex;
@@ -134,7 +122,6 @@
 
         background: #f3f4f6;
     }
-
 
     /* =====================================
        TOP TOOLBAR
@@ -156,7 +143,6 @@
         border-bottom: 1px solid #d1d5db;
     }
 
-
     .toolbar button {
         width: 34px;
         height: 34px;
@@ -172,11 +158,9 @@
         cursor: pointer;
     }
 
-
     .toolbar button:hover {
         background: #f3f4f6;
     }
-
 
     .url-display {
         flex: 1;
@@ -203,17 +187,14 @@
         white-space: nowrap;
     }
 
-
     /* =====================================
        PAGE FRAME
     ===================================== */
 
     .page-container {
         flex: 1;
-
         min-height: 0;
     }
-
 
     #page {
         display: block;
@@ -226,7 +207,6 @@
         background: white;
     }
 
-
     /* =====================================
        MOBILE
     ===================================== */
@@ -236,7 +216,6 @@
         .sidebar {
             width: 190px;
             min-width: 190px;
-
             padding: 12px;
         }
 
@@ -252,3 +231,225 @@
     }
 
 </style>
+
+</head> <body>
+<div class="app">
+
+    <!-- =================================
+         LEFT SIDEBAR
+    ================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Local + Cloud
+        </div>
+
+        <div class="section-title">
+            Pages
+        </div>
+
+        <button
+            class="nav-button active"
+            id="localButton"
+            onclick="openLocal()"
+        >
+            🖥️ Local
+        </button>
+
+        <button
+            class="nav-button"
+            id="cloudButton"
+            onclick="openCloud()"
+        >
+            ☁️ Cloud
+        </button>
+
+    </aside>
+
+
+    <!-- =================================
+         MAIN CONTENT
+    ================================== -->
+
+    <main class="main">
+
+        <!-- TOP TOOLBAR -->
+
+        <div class="toolbar">
+
+            <button
+                onclick="goBack()"
+                title="Back"
+            >
+                ←
+            </button>
+
+            <button
+                onclick="goForward()"
+                title="Forward"
+            >
+                →
+            </button>
+
+            <button
+                onclick="reloadPage()"
+                title="Reload"
+            >
+                ↻
+            </button>
+
+            <div
+                class="url-display"
+                id="urlDisplay"
+            >
+                Local Page
+            </div>
+
+        </div>
+
+
+        <!-- PAGE -->
+
+        <div class="page-container">
+
+            <iframe
+                id="page"
+                src="local.html"
+                title="Page Viewer"
+            ></iframe>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /*
+     * ==========================================
+     * CHANGE THIS URL
+     * ==========================================
+     *
+     * Put your GitHub Pages URL here.
+     *
+     * Example:
+     *
+     * https://username.github.io/repository/
+     *
+     */
+
+    const CLOUD_URL =
+        "https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/";
+
+
+    /*
+     * ==========================================
+     * ELEMENTS
+     * ==========================================
+     */
+
+    const page = document.getElementById("page");
+
+    const urlDisplay =
+        document.getElementById("urlDisplay");
+
+    const localButton =
+        document.getElementById("localButton");
+
+    const cloudButton =
+        document.getElementById("cloudButton");
+
+
+    /*
+     * ==========================================
+     * OPEN LOCAL PAGE
+     * ==========================================
+     */
+
+    function openLocal() {
+
+        page.src = "local.html";
+
+        urlDisplay.textContent =
+            "Local Page";
+
+        localButton.classList.add("active");
+
+        cloudButton.classList.remove("active");
+    }
+
+
+    /*
+     * ==========================================
+     * OPEN CLOUD PAGE
+     * ==========================================
+     */
+
+    function openCloud() {
+
+        page.src = CLOUD_URL;
+
+        urlDisplay.textContent =
+            CLOUD_URL;
+
+        cloudButton.classList.add("active");
+
+        localButton.classList.remove("active");
+    }
+
+
+    /*
+     * ==========================================
+     * BACK
+     * ==========================================
+     */
+
+    function goBack() {
+
+        try {
+            page.contentWindow.history.back();
+        }
+        catch (error) {
+            console.log(
+                "Cannot control history of external page."
+            );
+        }
+    }
+
+
+    /*
+     * ==========================================
+     * FORWARD
+     * ==========================================
+     */
+
+    function goForward() {
+
+        try {
+            page.contentWindow.history.forward();
+        }
+        catch (error) {
+            console.log(
+                "Cannot control history of external page."
+            );
+        }
+    }
+
+
+    /*
+     * ==========================================
+     * RELOAD
+     * ==========================================
+     */
+
+    function reloadPage() {
+
+        page.src = page.src;
+    }
+
+</script>
+
+</body> </html>

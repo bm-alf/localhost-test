@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Localhost Test</title>
+</head>
+<body>
+
+<h1>Cloud → Localhost Test</h1>
+
+<button onclick="callLocal()">Call Local Node.js</button>
+
+<pre id="result">Waiting...</pre>
+
+<script>
+async function callLocal() {
+    const result = document.getElementById("result");
+    result.textContent = "Connecting...";
+
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/test"
+        );
+
+        const data = await response.json();
+
+        result.textContent =
+            JSON.stringify(data, null, 2);
+
+    } catch (error) {
+        result.textContent =
+            "ERROR: " + error.message;
+    }
+}
+</script>
+
+</body>
+</html>
